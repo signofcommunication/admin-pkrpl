@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 
 const EmployeeSchema = new mongoose.Schema({
+  username: {
+    type: String,
+    required: [true, "Please provide a username"],
+  },
   name: {
     type: String,
     required: [true, "Please provide a name"],
@@ -9,9 +13,13 @@ const EmployeeSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please provide a phone number"],
   },
-  address: {
-    type: String,
-    required: [true, "Please provide a address"],
+  status: {
+    type: Boolean,
+    default: true,
+  },
+  last_login: {
+    type: Date,
+    default: Date.now(),
   },
 });
 
