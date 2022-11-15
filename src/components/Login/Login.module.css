@@ -1,0 +1,31 @@
+body {
+  background: #eee !important;
+  overflow-x: hidden;
+}
+
+.wrapper {
+  height: 75vh;
+  margin-top: 80px;
+  margin-bottom: 80px;
+  font-family: "Arial", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form_signin {
+  width: 35%;
+  padding: 15px 35px 45px;
+  margin: 0 auto;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+
+}
+
+.form_signin_heading {
+  padding: 15px;
+  text-align: center;
+  font-weight: bold;
+}
