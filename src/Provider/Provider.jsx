@@ -1,11 +1,18 @@
-import React, { useContext, createContext } from "react";
-import { signOut, signInWithEmailAndPassword, getAuth } from "firebase/auth";
+import React, { useContext, createContext, useState, useEffect } from "react";
+import {
+  signOut,
+  signInWithEmailAndPassword,
+  getAuth,
+  onAuthStateChanged,
+} from "firebase/auth";
 import { app } from "./firebase";
 import axios from "axios";
 
 const ProviderContext = createContext();
 
 function Provider({ children }) {
+  const [user, setUser] = useState();
+  const [error, setError] = useState();
   const auth = getAuth();
 
   function getAllProducts() {
@@ -116,6 +123,12 @@ function Provider({ children }) {
     return signOut(auth);
   }
 
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(getAuth(), setUser, setError);
+    localStorage.setItem("isAuthenticated", false);
+    return () => unsubscribe();
+  }, []);
+
   const value = {
     login,
     logout,
@@ -144,6 +157,8 @@ function Provider({ children }) {
     deleteProduct,
     getAllEmployees,
     getAllProducts,
+    user,
+    error,
   };
 
   return (

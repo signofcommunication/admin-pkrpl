@@ -1,8 +1,13 @@
 import React from "react";
-import "./Dashboard.css";
+import Navbar from "./Navbar/Navbar";
 
 function Dashboard() {
-  return <div></div>;
+  return (
+    <>
+      <Navbar />
+      <h1>Ho</h1>
+    </>
+  );
 }
 
 export default Dashboard;
