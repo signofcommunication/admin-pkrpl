@@ -16,6 +16,7 @@ async function postProducts(req, res) {
     const product = await Products.create(req.body);
     res.status(StatusCodes.CREATED).json({ product });
   } catch (e) {
+    console.log(e);
     res.status(StatusCodes.BAD_REQUEST).json({ error: e.messaage });
   }
 }
@@ -40,6 +41,7 @@ async function getSingleProduct(req, res) {
 async function editProduct(req, res) {
   try {
     const { id } = req.params;
+    console.log({ data: req.body, id });
     const editProduct = await Products.findByIdAndUpdate(
       { _id: id },
       req.body,

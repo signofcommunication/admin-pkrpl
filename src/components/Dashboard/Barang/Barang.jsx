@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import {
   Table,
   TableBody,
@@ -8,67 +8,57 @@ import {
   TableRow,
   Paper,
   Container,
-  TablePagination,
   Button,
   Grid,
   Typography,
 } from "@mui/material";
+import { Link } from "react-router-dom";
+import { useProvider } from "../../../Provider/Provider";
 import Navbar from "./Navbar";
 
-const columns = [
-  { id: "kd_barang", label: "Kode Barang" },
-  { id: "nama_barang", label: "Nama Barang" },
-  {
-    id: "stok",
-    label: "Stok",
-    align: "right",
-  },
-  {
-    id: "harga_jual",
-    label: "Harga Jual",
-    format: (value) => value.toLocaleString("en-US"),
-  },
-  {
-    id: "status",
-    label: "Status",
-  },
-];
-
-function createData(name, code, population, size) {
-  const density = population / size;
-  return { name, code, population, size, density };
+function createData(kode_barang, nama_barang, harga, stok, brand, status, id) {
+  return {
+    kd_barang: kode_barang,
+    nama_barang,
+    harga: harga.toLocaleString("en-US"),
+    stok,
+    brand,
+    status,
+    id,
+  };
 }
 
-const rows = [
-  createData("India", "IN", 1324171354, 3287263),
-  createData("China", "CN", 1403500365, 9596961),
-  createData("Italy", "IT", 60483973, 301340),
-  createData("United States", "US", 327167434, 9833520),
-  createData("Canada", "CA", 37602103, 9984670),
-  createData("Australia", "AU", 25475400, 7692024),
-  createData("Germany", "DE", 83019200, 357578),
-  createData("Ireland", "IE", 4857000, 70273),
-  createData("Mexico", "MX", 126577691, 1972550),
-  createData("Japan", "JP", 126317000, 377973),
-  createData("France", "FR", 67022000, 640679),
-  createData("United Kingdom", "GB", 67545757, 242495),
-  createData("Russia", "RU", 146793744, 17098246),
-  createData("Nigeria", "NG", 200962417, 923768),
-  createData("Brazil", "BR", 210147125, 8515767),
-];
-
 function Barang() {
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [data, setData] = useState([]);
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
+  const rows = data.map((d) =>
+    createData(d.kd_barang, d.title, d.price, d.stok, d.brand, d.status, d._id)
+  );
 
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
+  const { getAllProducts, deleteProduct } = useProvider();
+
+  async function getProducts() {
+    try {
+      const {
+        data: { products },
+      } = await getAllProducts();
+      setData(products);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async function handleDelete(id) {
+    try {
+      await deleteProduct(id);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  useEffect(() => getProducts, []);
+
+  console.log(data);
 
   return (
     <Fragment>
@@ -84,69 +74,82 @@ function Barang() {
                 margin: "20px 0",
               }}
             >
-              <Typography variant="h5">Data Barang</Typography>
+              <Typography variant="h5">📦 Data Barang</Typography>
               <Button variant="contained" color="success">
-                Tambang Barang
+                <Link
+                  to="/barang/tambah-barang"
+                  style={{ textDecoration: "none", color: "white" }}
+                >
+                  Tambang Barang
+                </Link>
               </Button>
             </div>
           </Grid>
           <Grid item>
-            <Paper sx={{ width: "100%", overflow: "hidden" }}>
-              <TableContainer sx={{ maxHeight: 440 }}>
-                <Table stickyHeader aria-label="sticky table">
-                  <TableHead>
-                    <TableRow>
-                      {columns.map((column) => (
-                        <TableCell
-                          key={column.id}
-                          align={column.align}
-                          style={{ minWidth: column.minWidth }}
+            {data.length == 0 ? (
+              <Typography style={{ textAlign: "center" }}>
+                Data is Empty
+              </Typography>
+            ) : (
+              <Paper sx={{ width: "100%", overflow: "hidden" }}>
+                <TableContainer component={Paper}>
+                  <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                    <TableHead>
+                      <TableRow>
+                        <TableCell>Kode Barang</TableCell>
+                        <TableCell align="center">Nama Barang</TableCell>
+                        <TableCell align="center">Harga</TableCell>
+                        <TableCell align="center">Stok</TableCell>
+                        <TableCell align="center">Brand</TableCell>
+                        <TableCell align="center">Opsi</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {rows.map((row) => (
+                        <TableRow
+                          key={row.name}
+                          sx={{
+                            "&:last-child td, &:last-child th": { border: 0 },
+                          }}
                         >
-                          {column.label}
-                        </TableCell>
+                          {console.log(row)}
+                          <TableCell>{row.kd_barang}</TableCell>
+                          <TableCell align="center">
+                            {row.nama_barang}
+                          </TableCell>
+                          <TableCell align="center">Rp{row.harga}</TableCell>
+                          <TableCell align="center">{row.stok}</TableCell>
+                          <TableCell align="center">{row.brand}</TableCell>
+                          <TableCell align="center">
+                            <Button
+                              variant="contained"
+                              style={{ marginRight: "10px" }}
+                            >
+                              <Link
+                                to={`/barang/edit-barang/${row.id}`}
+                                style={{
+                                  textDecoration: "none",
+                                  color: "white",
+                                }}
+                              >
+                                Edit
+                              </Link>
+                            </Button>
+                            <Button
+                              variant="contained"
+                              color="error"
+                              onClick={() => handleDelete(row.id)}
+                            >
+                              Delete
+                            </Button>
+                          </TableCell>
+                        </TableRow>
                       ))}
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {rows
-                      .slice(
-                        page * rowsPerPage,
-                        page * rowsPerPage + rowsPerPage
-                      )
-                      .map((row) => {
-                        return (
-                          <TableRow
-                            hover
-                            role="checkbox"
-                            tabIndex={-1}
-                            key={row.code}
-                          >
-                            {columns.map((column) => {
-                              const value = row[column.id];
-                              return (
-                                <TableCell key={column.id} align={column.align}>
-                                  {column.format && typeof value === "number"
-                                    ? column.format(value)
-                                    : value}
-                                </TableCell>
-                              );
-                            })}
-                          </TableRow>
-                        );
-                      })}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-              <TablePagination
-                rowsPerPageOptions={[10, 25, 100]}
-                component="div"
-                count={rows.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-              />
-            </Paper>
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </Paper>
+            )}
           </Grid>
         </Grid>
       </Container>

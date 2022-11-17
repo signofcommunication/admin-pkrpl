@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   AppBar,
   Box,
@@ -13,7 +13,6 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 
 function Navbar() {
   const [anchorEl, setAnchorEl] = useState(null);
-  const navigate = useNavigate();
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -79,22 +78,6 @@ function Navbar() {
                   style={{ textDecoration: "none", color: "black" }}
                 >
                   Supplier
-                </Link>
-              </MenuItem>
-              <MenuItem>
-                <Link
-                  to="/penjualan-barang"
-                  style={{ textDecoration: "none", color: "black" }}
-                >
-                  Penjualan Barang
-                </Link>
-              </MenuItem>
-              <MenuItem>
-                <Link
-                  to="/pembelian-barang"
-                  style={{ textDecoration: "none", color: "black" }}
-                >
-                  Pembelian Barang
                 </Link>
               </MenuItem>
             </Menu>
