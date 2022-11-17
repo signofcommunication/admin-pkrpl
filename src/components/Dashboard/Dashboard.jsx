@@ -5,7 +5,7 @@ function Dashboard() {
   return (
     <>
       <Navbar />
-      <h1>Ho</h1>
+      <h1>Welcome to Aplikasi Stok Barang</h1>
     </>
   );
 }
