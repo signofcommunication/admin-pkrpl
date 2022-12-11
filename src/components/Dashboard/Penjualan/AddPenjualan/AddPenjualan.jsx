@@ -16,7 +16,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
-function DatePicker() {
+function BasicDatePicker() {
   const [value, setValue] = (React.useState < Dayjs) | (null > null);
 
   return (
@@ -89,7 +89,7 @@ function AddPenjualan() {
               style={{ margin: "20px 0" }}
             >
               <Typography variant="h5">Tanggal</Typography>
-              <DatePicker />
+              <BasicDatePicker />
             </Grid>
             <Grid
               container
