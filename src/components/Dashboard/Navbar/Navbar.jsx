@@ -79,6 +79,14 @@ function Navbar() {
                   Supplier
                 </Link>
               </MenuItem>
+              <MenuItem>
+                <Link
+                  to="/penjualan"
+                  style={{ textDecoration: "none", color: "black" }}
+                >
+                  Data-Penjualan
+                </Link>
+              </MenuItem>
               <MenuItem
                 style={{
                   backgroundColor: "red",

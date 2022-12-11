@@ -13,6 +13,7 @@ import {
   AddSupplier,
   EditPegawai,
   EditSupplier,
+  Penjualan,
 } from "./components";
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
         <Route exact path="/barang/edit-barang/:id" element={<EditBarang />} />
         <Route exact path="/pegawai" element={<Pegawai />} />
         <Route exact path="/pegawai/tambah-pegawai" element={<AddPegawai />} />
+        <Route exact path="/penjualan" element={<Penjualan />} />
         <Route
           exact
           path="/pegawai/edit-pegawai/:id"

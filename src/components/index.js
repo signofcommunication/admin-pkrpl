@@ -10,3 +10,4 @@ export { default as EditPegawai } from "./Dashboard/Pegawai/EditPegawai/EditPega
 export { default as Supplier } from "./Dashboard/Supplier/Supplier";
 export { default as AddSupplier } from "./Dashboard/Supplier/AddSupplier/AddSupplier";
 export { default as EditSupplier } from "./Dashboard/Supplier/EditSupplier/EditSupplier";
+export { default as Penjualan } from "./Dashboard/Penjualan/Penjualan";
