@@ -80,7 +80,7 @@ function Barang() {
                   to="/barang/tambah-barang"
                   style={{ textDecoration: "none", color: "white" }}
                 >
-                  Tambang Barang
+                  Tambah Barang
                 </Link>
               </Button>
             </div>

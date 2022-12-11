@@ -75,7 +75,7 @@ function Supplier() {
                   to="/supplier/tambah-supplier"
                   style={{ textDecoration: "none", color: "white" }}
                 >
-                  Tambang Supplier
+                  Tambah Supplier
                 </Link>
               </Button>
             </div>

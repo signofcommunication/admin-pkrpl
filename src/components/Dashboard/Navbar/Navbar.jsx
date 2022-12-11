@@ -27,7 +27,7 @@ function Navbar() {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Admin
+            Nicastore Dashboard
           </Typography>
           <div>
             <IconButton
@@ -55,7 +55,6 @@ function Navbar() {
               open={Boolean(anchorEl)}
               onClose={handleCloser}
             >
-              <MenuItem /*onClick={handleLogout}*/>Logout</MenuItem>
               <MenuItem>
                 <Link
                   to="/barang"
@@ -79,6 +78,14 @@ function Navbar() {
                 >
                   Supplier
                 </Link>
+              </MenuItem>
+              <MenuItem
+                style={{
+                  backgroundColor: "red",
+                  color: "white",
+                }} /*onClick={handleLogout}*/
+              >
+                Logout
               </MenuItem>
             </Menu>
           </div>

@@ -1,11 +1,24 @@
 import React from "react";
 import Navbar from "./Navbar/Navbar";
+import { Typography } from "@mui/material";
 
 function Dashboard() {
   return (
     <>
       <Navbar />
-      <h1>Welcome to Aplikasi Stok Barang</h1>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          width: "100vw",
+          height: "80vh",
+          justifyContent: "center",
+        }}
+      >
+        <Typography style={{ textAlign: "center" }}>
+          Welcome to Nicastore Dashboard
+        </Typography>
+      </div>
     </>
   );
 }

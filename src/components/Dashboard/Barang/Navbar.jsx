@@ -1,6 +1,7 @@
 import React from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AppBar, Box, Toolbar, IconButton, Typography } from "@mui/material";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 function Navbar() {
   return (
@@ -8,7 +9,9 @@ function Navbar() {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Back
+            <Link to="/" style={{ textDecoration: "none", color: "#1D1D1B" }}>
+              <ArrowBackIcon />
+            </Link>
           </Typography>
           <div>
             <IconButton

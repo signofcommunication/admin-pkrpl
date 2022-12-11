@@ -76,7 +76,7 @@ function Pegawai() {
                   to="/pegawai/tambah-pegawai"
                   style={{ textDecoration: "none", color: "white" }}
                 >
-                  Tambang Pegawai
+                  Tambah Pegawai
                 </Link>
               </Button>
             </div>
